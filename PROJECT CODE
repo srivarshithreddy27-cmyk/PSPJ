@@ -1,0 +1,89 @@
+import java.util.Scanner;
+
+public class project {
+
+    static Scanner sc = new Scanner(System.in);
+    static boolean[] seats = new boolean[10];
+
+    static void displaySeats() {
+        System.out.println("\n--- Seat Status ---");
+
+        for (int i = 0; i < seats.length; i++) {
+            if (seats[i]) {
+                System.out.println("Seat " + (i + 1) + " - Booked");
+            } else {
+                System.out.println("Seat " + (i + 1) + " - Available");
+            }
+        }
+    }
+
+    static void bookSeat() {
+        System.out.print("\nEnter your name: ");
+        String name = sc.nextLine();
+
+        System.out.print("Enter movie name: ");
+        String movie = sc.nextLine();
+
+        displaySeats();
+
+        System.out.print("\nEnter seat number to book: ");
+        int seatNumber = sc.nextInt();
+
+        if (seatNumber < 1 || seatNumber > 10) {
+            System.out.println("Invalid seat number!");
+        } 
+        else if (seats[seatNumber - 1]) {
+            System.out.println("Sorry, this seat is already booked!");
+        } 
+        else {
+            seats[seatNumber - 1] = true;
+
+            int ticketPrice = 200;
+
+            System.out.println("\n--- Booking Successful ---");
+            System.out.println("Customer Name : " + name);
+            System.out.println("Movie Name    : " + movie);
+            System.out.println("Seat Number   : " + seatNumber);
+            System.out.println("Ticket Price  : ₹" + ticketPrice);
+            System.out.println("Status        : Confirmed");
+        }
+    }
+
+    public static void main(String[] args) {
+
+        int choice;
+
+        do {
+            System.out.println("\n==============================");
+            System.out.println("   CINEMA SEAT BOOKING SYSTEM");
+            System.out.println("==============================");
+            System.out.println("1. Display Seats");
+            System.out.println("2. Book a Seat");
+            System.out.println("3. Exit");
+            System.out.print("Enter your choice: ");
+
+            choice = sc.nextInt();
+            sc.nextLine();
+
+            switch (choice) {
+                case 1:
+                    displaySeats();
+                    break;
+
+                case 2:
+                    bookSeat();
+                    break;
+
+                case 3:
+                    System.out.println("Thank you for using the system!");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice!");
+            }
+
+        } while (choice != 3);
+
+        sc.close();
+    }
+}
